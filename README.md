@@ -1,1 +1,1 @@
-This project, developed for Girlathon, is a mental health support system designed to assist children living in nuclear families where both parents are busy working. It features a chatbot-based mobile application built using Flutter and Dialogflow.
+This project, developed for Girlathon, is a mental health support system designed to assist children living in nuclear families where both parents are busy working. It features a chatbot-based web application built using Flutter and Dialogflow.
