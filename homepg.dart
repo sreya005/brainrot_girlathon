@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_web_app/childdashboard.dart';
-import 'package:my_web_app/login.dart';
+import 'childdashboard.dart';
+import 'login.dart';
 import 'dart:async';
 import 'routine.dart';
 import 'childaihistory.dart';
