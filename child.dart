@@ -1,27 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const EmotionBridge());
-}
-
-class EmotionBridge extends StatelessWidget {
-  const EmotionBridge({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Emotion Bridge',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.grey[100],
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const EmotionBridgeHome(),
-    );
-  }
-}
-
 class EmotionBridgeHome extends StatefulWidget {
   const EmotionBridgeHome({super.key});
 
@@ -69,8 +47,18 @@ class _EmotionBridgeHomeState extends State<EmotionBridgeHome> {
     final now = DateTime.now();
     final days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     final months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
     ];
     final day = days[now.weekday % 7];
     final month = months[now.month - 1];
@@ -164,7 +152,8 @@ class _EmotionBridgeHomeState extends State<EmotionBridgeHome> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.send_rounded, color: Colors.deepPurple),
+                    icon: const Icon(Icons.send_rounded,
+                        color: Colors.deepPurple),
                     onPressed: () {
                       _sendMessage(_controller.text);
                     },
@@ -220,7 +209,8 @@ class _EmotionBridgeHomeState extends State<EmotionBridgeHome> {
                   children: [
                     Row(
                       children: const [
-                        Icon(Icons.account_circle, size: 30, color: Colors.deepPurple),
+                        Icon(Icons.account_circle,
+                            size: 30, color: Colors.deepPurple),
                         SizedBox(width: 8),
                         Text("Online", style: TextStyle(color: Colors.green)),
                       ],
@@ -264,7 +254,8 @@ class _EmotionBridgeHomeState extends State<EmotionBridgeHome> {
                         Expanded(
                           child: TextField(
                             controller: _parentMsgController,
-                            decoration: const InputDecoration(hintText: 'Message'),
+                            decoration:
+                                const InputDecoration(hintText: 'Message'),
                           ),
                         ),
                         IconButton(
@@ -294,7 +285,8 @@ class _EmotionBridgeHomeState extends State<EmotionBridgeHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Daily Tasks',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Expanded(
                     child: ListView(
@@ -313,12 +305,14 @@ class _EmotionBridgeHomeState extends State<EmotionBridgeHome> {
                             isEditing
                                 ? Expanded(
                                     child: TextField(
-                                      controller: _taskEditController..text = entry.key,
+                                      controller: _taskEditController
+                                        ..text = entry.key,
                                       autofocus: true,
                                       onSubmitted: (newName) {
                                         if (newName.trim().isEmpty ||
                                             _tasks.containsKey(newName)) {
-                                          setState(() => _editingTaskKey = null);
+                                          setState(
+                                              () => _editingTaskKey = null);
                                           return;
                                         }
                                         final status = _tasks.remove(entry.key);
@@ -337,7 +331,8 @@ class _EmotionBridgeHomeState extends State<EmotionBridgeHome> {
                               },
                             ),
                             IconButton(
-                              icon: const Icon(Icons.delete, size: 18, color: Colors.grey),
+                              icon: const Icon(Icons.delete,
+                                  size: 18, color: Colors.grey),
                               onPressed: () {
                                 setState(() {
                                   _tasks.remove(entry.key);
