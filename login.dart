@@ -1,26 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const EmotionBridgeApp());
-}
-
-class EmotionBridgeApp extends StatelessWidget {
-  const EmotionBridgeApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'EmotionBridge',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        fontFamily: 'Segoe UI',
-      ),
-      home: const LoginScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -84,8 +63,17 @@ class _LoginScreenState extends State<LoginScreen>
       final dashboardType =
           selectedRole == 'parent' ? 'Parent Dashboard' : 'Child Dashboard';
 
-      _showDialog(
-          'Welcome to EmotionBridge, $roleName!\n\nRedirecting to $dashboardType...');
+      _showDialogWithCallback(
+        'Welcome to EmotionBridge, $roleName!\n\nRedirecting to $dashboardType...',
+        onDialogClose: () {
+          // Navigate based on selected role
+          if (selectedRole == 'parent') {
+            Navigator.pushNamed(context, '/home');
+          } else {
+            Navigator.pushNamed(context, '/child');
+          }
+        },
+      );
     }
   }
 
@@ -99,6 +87,29 @@ class _LoginScreenState extends State<LoginScreen>
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showDialogWithCallback(String message, {VoidCallback? onDialogClose}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Success'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close dialog
+                if (onDialogClose != null) {
+                  onDialogClose(); // Execute navigation
+                }
+              },
               child: const Text('OK'),
             ),
           ],
@@ -227,7 +238,8 @@ class _LoginScreenState extends State<LoginScreen>
               : null,
           color: isSelected ? null : const Color(0xFFF8F9FA),
           border: Border.all(
-            color: isSelected ? const Color(0xFF495057) : const Color(0xFFE9ECEF),
+            color:
+                isSelected ? const Color(0xFF495057) : const Color(0xFFE9ECEF),
             width: 2,
           ),
           borderRadius: BorderRadius.circular(16),
@@ -298,7 +310,8 @@ class _LoginScreenState extends State<LoginScreen>
             child: ElevatedButton(
               onPressed: (selectedRole != null && !isLoading) ? login : null,
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 40),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 14, horizontal: 40),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
