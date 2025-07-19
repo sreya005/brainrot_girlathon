@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_web_app/childdashboard.dart';
+import 'package:my_web_app/login.dart';
 import 'dart:async';
 import 'routine.dart';
 import 'childaihistory.dart';
@@ -17,7 +19,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'Segoe UI',
       ),
-      home: ParentDashboard(),
+      initialRoute: '/', // Start with login page
+      routes: {
+        '/': (context) => LoginScreen(),
+        '/home': (context) => ParentDashboard(),
+        '/child': (context) => EmotionBridgeHome(), // Add child dashboard route
+      },
     );
   }
 }
